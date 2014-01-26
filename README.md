@@ -1,6 +1,8 @@
 HexGL
 =========
 
+This is my fork of HexGL. The original README is below, and my only additions are related to having speed react to music.
+
 Source code of [HexGL](http://hexgl.bkcore.com), the futuristic HTML5 racing game by [Thibaut Despoulain](http://bkcore.com)
 
 ## Branches
