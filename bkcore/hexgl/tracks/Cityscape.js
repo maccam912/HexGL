@@ -9,6 +9,7 @@ var hexGLscene;
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 bkcore.hexgl.tracks = bkcore.hexgl.tracks || {};
+var sun;
 
 bkcore.hexgl.tracks.Cityscape = {
 
@@ -275,6 +276,7 @@ bkcore.hexgl.tracks.Cityscape = {
 		// SKYBOX
 		var sceneCube = new THREE.Scene();
 
+
 		var cameraCube = new THREE.PerspectiveCamera( 70, ctx.width / ctx.height, 1, 6000 );
 		sceneCube.add( cameraCube );
 
@@ -304,10 +306,10 @@ bkcore.hexgl.tracks.Cityscape = {
 		var scene = new THREE.Scene();
         hexGLscene = scene;
 		scene.add( camera );
-		scene.add( new THREE.AmbientLight( ambient ) );
+		//scene.add( new THREE.AmbientLight( ambient ) );
 
 		// SUN
-		var sun = new THREE.DirectionalLight( diffuse, 1.5, 30000 );
+		sun = new THREE.DirectionalLight( diffuse, 1.5, 30000 );
 		sun.position.set( -4000, 1200, 1800 );
 		sun.lookAt(new THREE.Vector3());
 

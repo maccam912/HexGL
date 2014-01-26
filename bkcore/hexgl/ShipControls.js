@@ -154,10 +154,6 @@ bkcore.hexgl.ShipControls = function(domElement)
         audio.play();
     }
 
-    var directionalLight = new THREE.DirectionalLight(0xffdb4d, 1.0);
-    directionalLight.position.set(0, 1, 0);
-    HexGLscene.add( directionalLight );
-
     var javascriptNode;
     function setupAnalyser() {
         javascriptNode = audioContext.createScriptProcessor(2048, 1, 1);
@@ -167,14 +163,35 @@ bkcore.hexgl.ShipControls = function(domElement)
             analyser.getByteFrequencyData(array);
             amp = 0;
             lowamp = 0;
+            // 450 for Bohemian Rhapsody, 650 for Syn Cole
             for (var i = 650; i < array.length; i++) {
                 amp += array[i];
             }
             for (var i = 0; i < 100; i++) {
                 lowamp += array[i];
             }
+            sun.intensity = lowamp/1000-18;
         }
     }
+
+    setInterval(function() {
+        if (sun.color.r === 1) {
+            sun.color.r = 0;
+            sun.color.g = 1;
+            sun.color.b = 0;
+        }
+        else if (sun.color.g === 1) {
+            sun.color.r = 0;
+            sun.color.g = 0;
+            sun.color.b = 1;
+        }
+        else if (sun.color.b === 1) {
+            sun.color.r = 1;
+            sun.color.g = 0;
+            sun.color.b = 0;
+        }
+    }, 480);
+    // 480 ms = 125 BPM
 
     function onKeyUp(event)
     {
@@ -261,12 +278,10 @@ bkcore.hexgl.ShipControls.prototype.update = function(dt)
         this.speed -= this.airResist * dt;
     */
    if (amp) {
-       console.log(amp);
    this.speed = (amp/8000);
    this.speed *= 3.5;
    if (this.speed > 7) this.speed = 7;
    }
-   // console.log(this.speed);
     if(this.key.left)
         {
             angularAmount += this.angularSpeed * dt;

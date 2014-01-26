@@ -6,7 +6,7 @@
 var bkcore = bkcore || {};
 bkcore.threejs = bkcore.threejs || {};
 
-bkcore.threejs.Shaders = 
+bkcore.threejs.Shaders =
 {
 	'additive' : {
 		uniforms: {
@@ -416,7 +416,7 @@ bkcore.threejs.Shaders =
 					"#ifdef DOUBLE_SIDED",
 
 						"float flipNormal = ( -1.0 + 2.0 * float( gl_FrontFacing ) );",
-						
+
 					"#else",
 
 						"float flipNormal = 1.0;",
@@ -514,6 +514,7 @@ bkcore.threejs.Shaders =
 		//		- PER-VERTEX point and directional lights (use with "lights: true" material option)
 		 ------------------------------------------------------------------------- */
 
+        lights: true,
 		'normalV' : {
 
 			uniforms: THREE.UniformsUtils.merge( [
