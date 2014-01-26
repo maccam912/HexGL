@@ -1,10 +1,11 @@
  /*
  * HexGL
  * @author Thibaut 'BKcore' Despoulain <http://bkcore.com>
- * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
  *          To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
 
+var hexGLscene;
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 bkcore.hexgl.tracks = bkcore.hexgl.tracks || {};
@@ -21,8 +22,8 @@ bkcore.hexgl.tracks.Cityscape = {
 	},
 
 	spawn: {
-		x: -1134*2, 
-		y: 387, 
+		x: -1134*2,
+		y: 387,
 		z: -443*2
 	},
 
@@ -159,7 +160,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			});
 
 			this.materials.booster = new THREE.MeshBasicMaterial({
-				map: this.lib.get("textures", "booster.diffuse"), 
+				map: this.lib.get("textures", "booster.diffuse"),
 				transparent: true
 			});
 
@@ -175,11 +176,11 @@ bkcore.hexgl.tracks.Cityscape = {
 
 			this.materials.start = new THREE.MeshBasicMaterial({
 				map: this.lib.get("textures", "track.cityscape.start.diffuse"),
-				ambient: 0xcccccc	
+				ambient: 0xcccccc
 			});
 
 			this.materials.startBanner = new THREE.MeshBasicMaterial({
-				map: this.lib.get("textures", "track.cityscape.start.banner"), 
+				map: this.lib.get("textures", "track.cityscape.start.banner"),
 				transparent: false
 			});
 		}
@@ -221,7 +222,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			});
 
 			this.materials.booster = new THREE.MeshBasicMaterial({
-				map: this.lib.get("textures", "booster.diffuse"), 
+				map: this.lib.get("textures", "booster.diffuse"),
 				transparent: true
 			});
 
@@ -260,7 +261,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			});
 
 			this.materials.startBanner = new THREE.MeshBasicMaterial({
-				map: this.lib.get("textures", "track.cityscape.start.banner"), 
+				map: this.lib.get("textures", "track.cityscape.start.banner"),
 				transparent: false
 			});
 		}
@@ -297,10 +298,11 @@ bkcore.hexgl.tracks.Cityscape = {
 
 		var ambient = 0xbbbbbb, diffuse = 0xffffff, specular = 0xffffff, shininess = 42, scale = 23;
 
-		// MAIN SCENE		
+		// MAIN SCENE
 		var camera = new THREE.PerspectiveCamera( 70, ctx.width / ctx.height, 1, 60000 );
-		
+
 		var scene = new THREE.Scene();
+        hexGLscene = scene;
 		scene.add( camera );
 		scene.add( new THREE.AmbientLight( ambient ) );
 
@@ -328,15 +330,15 @@ bkcore.hexgl.tracks.Cityscape = {
 
 		// SHIP
 		var ship = ctx.createMesh(scene, this.lib.get("geometries", "ship.feisar"), -1134*2, 10, -443*2, this.materials.ship);
-		
+
 		var booster = ctx.createMesh(ship, this.lib.get("geometries", "booster"), 0, 0.665, -3.8, this.materials.booster);
 		booster.depthWrite = false;
 
-		var boosterSprite = new THREE.Sprite({ 
-			map: this.lib.get("textures", "booster.sprite"), 
-			blending: THREE.AdditiveBlending,  
-			useScreenCoordinates: false, 
-			color: 0xffffff 
+		var boosterSprite = new THREE.Sprite({
+			map: this.lib.get("textures", "booster.sprite"),
+			blending: THREE.AdditiveBlending,
+			useScreenCoordinates: false,
+			color: 0xffffff
 		});
 		boosterSprite.scale.set(0.02, 0.02, 0.02);
 		boosterSprite.mergeWith3D = false;
@@ -406,7 +408,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			var dt = delta/16.6;
 
 			this.objects.components.shipControls.update(dt);
-			
+
 			this.objects.components.shipEffects.update(dt);
 
 			this.objects.components.cameraChase.update(dt, this.objects.components.shipControls.getSpeedRatio());
@@ -422,9 +424,9 @@ bkcore.hexgl.tracks.Cityscape = {
 
 			this.objects.composers.game.render(dt);
 			this.objects.hud.update(
-				this.objects.components.shipControls.getRealSpeed(100), 
-				this.objects.components.shipControls.getRealSpeedRatio(), 
-				this.objects.components.shipControls.getShield(100), 
+				this.objects.components.shipControls.getRealSpeed(100),
+				this.objects.components.shipControls.getRealSpeedRatio(),
+				this.objects.components.shipControls.getShield(100),
 				this.objects.components.shipControls.getShieldRatio()
 			);
 			if(this.objects.components.shipControls.getShieldRatio() < 0.2)

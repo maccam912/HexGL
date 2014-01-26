@@ -1,7 +1,7 @@
  /*
  * HexGL
  * @author Thibaut 'BKcore' Despoulain <http://bkcore.com>
- * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License. 
+ * @license This work is licensed under the Creative Commons Attribution-NonCommercial 3.0 Unported License.
  *          To view a copy of this license, visit http://creativecommons.org/licenses/by-nc/3.0/.
  */
 
@@ -42,7 +42,7 @@ bkcore.hexgl.CameraChase.prototype.update = function(dt, ratio)
 	this.target.addSelf(this.up.multiplyScalar(this.yoffset));
 	this.target.y += -this.up.y + this.yoffset;
 	this.camera.position.copy(this.target, this.lerp);
-	
+
 	this.camera.lookAt(this.dir.normalize().multiplyScalar(this.viewOffset).addSelf(this.targetObject.position));
 
 	if(this.cameraCube != null)
